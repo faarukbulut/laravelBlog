@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 
 Route::prefix('/admin')->group(function(){
-    Route::get('/category-list', [CategoryController::class, 'list']);
-
+    Route::get('/category-list', [CategoryController::class, 'list'])->name("admin.category.list");
+    Route::get('/category-create', [CategoryController::class, 'create'])->name("admin.category.create");
+    Route::post('/category-create', [CategoryController::class, 'store']);
 });
