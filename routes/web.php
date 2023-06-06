@@ -3,15 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
-
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('home');
+use App\Http\Controllers\Auth\LoginController;
 
 
 
+Route::get('/admin/login', [LoginController::class, "showLogin"])->name("login");
+Route::post('/admin/login', [LoginController::class, "login"]);
 
-Route::prefix('/admin')->group(function(){
+Route::prefix('/admin')->middleware('auth')->group(function(){
+
+    Route::get('/', function(){
+        return view('admin.index');
+    })->name('admin.index');
+
+    Route::post('/logout', [LoginController::class, "logout"])->name('logout');
 
     Route::get('/articles', [ArticleController::class, 'index'])->name('admin.articles.list');
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('admin.articles.create');

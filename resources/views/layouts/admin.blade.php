@@ -32,8 +32,6 @@
 
         <div class="app-container">
 
-            @include('layouts.admin.search')
-
             @include('layouts.admin.header')
 
             <div class="app-content">

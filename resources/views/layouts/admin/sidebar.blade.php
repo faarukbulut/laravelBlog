@@ -12,8 +12,8 @@
     <div class="app-menu">
         <ul class="accordion-menu">
             
-            <li class="{{ Route::is('home') ? 'active-page' : '' }}">
-                <a href="{{ route('home') }}"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>
+            <li class="{{ Route::is('admin.index') ? 'active-page' : '' }}">
+                <a href="{{ route('admin.index') }}"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>
             </li>
 
             <li class="{{ Route::is('admin.categories.list') ? 'active-page' : '' }}">
