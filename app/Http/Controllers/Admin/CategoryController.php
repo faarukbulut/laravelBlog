@@ -48,4 +48,28 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.list');
     }
 
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => ['required' , 'integer', 'exists:categories']
+        ]);
+
+        $categoryID = $request->id;
+        Category::where('id', $categoryID)->delete();
+        return redirect()->route('admin.categories.list');
+    }
+
+    public function edit(Request $request)
+    {
+        $categoryID = $request->id;
+        $category = Category::where('id', $categoryID)->first();
+
+        if(!$category)
+        {
+            return redirect()->back();
+        }
+
+        return view('admin.categories.create-update', compact('category'));
+    }
+
 }

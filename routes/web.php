@@ -20,5 +20,7 @@ Route::prefix('/admin')->group(function(){
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/categories/change-status', [CategoryController::class, 'changeStatus'])->name('admin.categories.changeStatus');
     Route::post('/categories/change-featurestatus', [CategoryController::class, 'changeFeatureStatus'])->name('admin.categories.changeFeatureStatus');
+    Route::post('/categories/delete', [CategoryController::class, 'delete'])->name('admin.categories.delete');
+    Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
 
 });

@@ -59,8 +59,8 @@
                             <td>{{$item->order}}</td>
                             <td>
                                 <span>
-                                    <a href="javascript:void(0)" data-id="{{$item->id}}" class=""><i class="material-icons ms-0">edit</i></a>
-                                    <a href="javascript:void(0)" data-id="{{$item->id}}" class=""><i class="material-icons ms-0">delete</i></a>
+                                    <a href="{{ route('admin.categories.edit', ['id' => $item->id ]) }}" class=""><i class="material-icons ms-0">edit</i></a>
+                                    <a href="javascript:void(0)" data-name="{{$item->name}}" data-id="{{$item->id}}" class="btnDelete"><i class="material-icons ms-0">delete</i></a>
                                 </span>
                             </td>
                         </tr>
@@ -77,11 +77,6 @@
     <form action="" method="POST" id="statusChange">
         @csrf
         <input type="hidden" name="id" id="inputStatus" value="">
-    </form>
-
-    <form action="" method="POST" id="featureStatusChange">
-        @csrf
-        <input type="hidden" name="id" id="inputFeatureStatus" value="">
     </form>
 
 @endsection
@@ -114,7 +109,7 @@
 
             $('.btnChangeFeatureStatus').click(function() {
                 let categoryID = $(this).data('id');
-                $('#inputFeatureStatus').val(categoryID);
+                $('#inputStatus').val(categoryID);
 
                 Swal.fire({
                     title: 'Feature durumunu değiştirmek istediğine emin misin?',
@@ -125,15 +120,35 @@
                     cancelButtonText: 'İptal',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $('#featureStatusChange').attr("action", "{{ route('admin.categories.changeFeatureStatus') }}");
-                        $('#featureStatusChange').submit();
+                        $('#statusChange').attr("action", "{{ route('admin.categories.changeFeatureStatus') }}");
+                        $('#statusChange').submit();
                     } else if (result.isDenied) {
                         Swal.fire('İşlemden vazgeçildi.', '', 'info')
                     }
                 });
             });
 
+            $('.btnDelete').click(function() {
+                let categoryID = $(this).data('id');
+                let categoryName = $(this).data('name');
+                $('#inputStatus').val(categoryID);
 
+                Swal.fire({
+                    title: categoryName + ' kategorisini silmek istediğine emin misin?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Evet',
+                    denyButtonText: `Hayır`,
+                    cancelButtonText: 'İptal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#statusChange').attr("action", "{{ route('admin.categories.delete') }}");
+                        $('#statusChange').submit();
+                    } else if (result.isDenied) {
+                        Swal.fire('İşlemden vazgeçildi.', '', 'info')
+                    }
+                });
+            });
         });
     </script>
 @endsection
