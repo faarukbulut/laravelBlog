@@ -18,4 +18,7 @@ Route::prefix('/admin')->group(function(){
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories.list');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/categories/change-status', [CategoryController::class, 'changeStatus'])->name('admin.categories.changeStatus');
+    Route::post('/categories/change-featurestatus', [CategoryController::class, 'changeFeatureStatus'])->name('admin.categories.changeFeatureStatus');
+
 });

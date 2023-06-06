@@ -11,19 +11,16 @@
     </div>
     <div class="app-menu">
         <ul class="accordion-menu">
-            <li class="sidebar-title">
-                Apps
-            </li>
-
+            
             <li class="{{ Route::is('home') ? 'active-page' : '' }}">
                 <a href="{{ route('home') }}"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>
             </li>
 
-            <li class="{{ Route::is('categories') ? 'active-page' : '' }}">
-                <a href="{{ route('admin.categories.list') }}"><i class="material-icons-two-tone">categories</i>Kategori Yönetimi</a>
+            <li class="{{ Route::is('admin.categories.list') ? 'active-page' : '' }}">
+                <a href="{{ route('admin.categories.list') }}"><i class="material-icons-two-tone">article</i>Kategori Yönetimi</a>
             </li>
 
-            <li class="{{ Route::is('article') ? 'active-page' : '' }}">
+            <li class="{{ Route::is('admin.articles.list') ? 'active-page' : '' }}">
                 <a href="{{ route('admin.articles.list') }}"><i class="material-icons-two-tone">article</i>Makale Yönetimi</a>
             </li>
 

@@ -8,10 +8,13 @@
 @endsection
 
 @section('content')
-
-    <x-admin.page-description>
-        <x-slot name="title">Dashboard</x-slot>
-    </x-admin.page-description>
+    <div class="row">
+        <div class="col">
+            <div class="page-description">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
