@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $list = Category::with(['parentCategory:id,name'])->get();
+        $list = Category::with(['parentCategory:id,name'])->paginate(10);
 
         return view('admin.categories.list', compact('list'));
     }
