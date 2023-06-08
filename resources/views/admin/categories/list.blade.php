@@ -16,6 +16,53 @@
             <br><br>
         </div>
         <div class="card-body">
+
+            <form action="">
+                <div class="row">
+                    <div class="col-3 my-1">
+                        <input type="text" class="form-control" placeholder="Kategori Adı" name="name" value="{{ request()->get('name') }}">
+                    </div>
+                    <div class="col-3 my-1">
+                        <input type="text" class="form-control" placeholder="Slug" name="slug" value="{{ request()->get('slug') }}">
+                    </div>
+                    <div class="col-3 my-1">
+                        <input type="text" class="form-control" placeholder="Açıklama" name="description" value="{{ request()->get('description') }}">
+                    </div>
+                    <div class="col-3 my-1">
+                        <input type="text" class="form-control" placeholder="Sıralama" name="order" value="{{ request()->get('order') }}">
+                    </div>
+                    <div class="col-3 my-1">
+                        <select class="form-select" name="parent_id">
+                            <option value="{{ null }}">Üst Kategori</option>
+                            @foreach($parentCategories as $parent)
+                                <option value="{{ $parent->id }}"  {{ request()->get('parent_id') == $parent->id ? "selected" : "" }} >{{ $parent->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-3 my-1">
+                        <select class="form-select" name="status">
+                            <option selected>Durum</option>
+                            <option value="0" {{ request()->get('status') == 0 ? "selected" : "" }} >Pasif</option>
+                            <option value="1" {{ request()->get('status') == 1 ? "selected" : "" }} >Aktif</option>
+                        </select>
+                    </div>
+                    <div class="col-3 my-1">
+                        <select class="form-select" name="feature_status">
+                            <option selected>Feature Durum</option>
+                            <option value="0" {{ request()->get('feature_status') == 0 ? "selected" : "" }} >Pasif</option>
+                            <option value="1" {{ request()->get('feature_status') == 1 ? "selected" : "" }} >Aktif</option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="mx-auto mb-2">
+                    <button class="btn btn-primary" type="submit">Filtrele</button>
+                    <button class="btn btn-primary" type="submit">Temizle</button>
+                </div>
+                
+            </form>
+
+            <br>
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered">
                     <tr>
@@ -69,7 +116,7 @@
 
                 </table>
 
-                {{ $list->links() }}
+                {{ $list->appends(request()->all())->links() }}
             </div>
         </div>
     </div>

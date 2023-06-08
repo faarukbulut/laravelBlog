@@ -10,11 +10,22 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $list = Category::with(['parentCategory:id,name'])->paginate(10);
+        $list = Category::with(['parentCategory:id,name'])
+            ->name($request->name)
+            ->slug($request->slug)
+            ->description($request->description)
+            ->order($request->order)
+            ->parentId($request->parent_id)
+            ->status($request->status)
+            ->featureStatus($request->feature_status)
+            ->paginate(10);
 
-        return view('admin.categories.list', compact('list'));
+
+        $parentCategories = Category::all();
+
+        return view('admin.categories.list', compact('list', 'parentCategories'));
     }
 
     public function changeStatus(Request $request)
