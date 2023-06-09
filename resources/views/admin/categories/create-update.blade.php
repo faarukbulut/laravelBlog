@@ -35,7 +35,7 @@
 
                         <input type="number" class="form-control form-control-solid-bordered m-b-sm " placeholder="Sıralama" name="order" value="{{ isset($category) ? $category->order : '' }}" required>
 
-                        <select class="form-select form-control">
+                        <select class="form-select form-control" name="parent_id">
                             <option value="{{ null }}">Üst Kategori Seçimi</option>
                             @foreach($categories as $item)
                                 <option value="{{ $item->id }}" value="{{ isset($category) && $category->id == $item->id ? 'selected' : '' }}" >
